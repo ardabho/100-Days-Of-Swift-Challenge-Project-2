@@ -54,8 +54,13 @@ class ViewController: UITableViewController {
     
     //Delete all items
     @objc func clearTapped() {
-        shoppingList.removeAll()
-        tableView.reloadData()
+        let ac = UIAlertController(title: "Are you sure?", message: "You are about to delete all the items from your list", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] _ in
+            self?.shoppingList.removeAll()
+            self?.tableView.reloadData()
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
     }
     
     //MARK: - Table View Methods
